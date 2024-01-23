@@ -2,7 +2,7 @@ import React from "react";
 import footLogo from "../assets/footLogo1.png";
 import Facebook from "../assets/Facebook";
 import Insta from "../assets/Insta";
-import Tumb from "../assets/tumb";
+import Tumb from "../assets/Tumb";
 import Youtube from "../assets/Youtube";
 import Snap from "../assets/Snap";
 import Pint from "../assets/Pint";
