@@ -82,7 +82,7 @@ export default function MainPage() {
           <div className="w-full h-20 flex justify-center">
             <div className="max-w-7xl w-full h-full grid grid-cols-4">
               {/* 75% cols-3*/}
-              <div className="col-span-3 bg-white -translate-y-8">
+              <div className="col-span-3 bg-white -translate-y-8 px-4">
                 <SelectedBtns numTracks={testimonials} selected={selected} setSelected={setSelected} />
               </div>
               {/* 25% cols-1*/}
