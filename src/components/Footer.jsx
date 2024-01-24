@@ -57,24 +57,24 @@ export default function Footer() {
         <div className="space-y-6">
           <h4 className="font-semibold">FOLLOW MARVEL</h4>
           <div className="grid grid-cols-4 grid-rows-2 gap-y-6 gap-x-6">
-            <p>
+            <div>
               <Facebook />
-            </p>
-            <p>
+            </div>
+            <div>
               <Insta />
-            </p>
-            <p>
+            </div>
+            <div>
               <Tumb />
-            </p>
-            <p>
+            </div>
+            <div>
               <Youtube />
-            </p>
-            <p>
+            </div>
+            <div>
               <Snap />
-            </p>
-            <p>
+            </div>
+            <div>
               <Pint />
-            </p>
+            </div>
           </div>
         </div>
       </div>
