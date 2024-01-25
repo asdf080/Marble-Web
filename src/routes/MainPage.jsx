@@ -7,8 +7,8 @@ import { useQuery } from "react-query";
 import { apiGetComics } from "./api";
 
 export default function MainPage() {
-  //const qeury = useQuery(["getComics"], apiGetComics);
-  //console.log(qeury);
+  // const { data, isLoading } = useQuery(["getComics"], apiGetComics);
+  // console.log(isLoading, data);
 
   return (
     <>
@@ -20,7 +20,11 @@ export default function MainPage() {
           <TitleImgBox imgUrl="https://assets-prd.ignimgs.com/2023/11/03/themarvels-blogroll-1699047196961.jpg" />
           {/* 코믹스 리스트 */}
           <Layout7>
-            <div className="w-full h-60 bg-red-300"></div>
+            <div className="w-full h-60 bg-red-300">
+              {/* {data?.data?.results.slice(0, 5).map((item, index) => (
+                <div key={index}>{item.title}</div>
+              ))} */}
+            </div>
           </Layout7>
         </section>
       </Layout>
