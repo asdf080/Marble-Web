@@ -5,7 +5,7 @@ const BASE_URL = "https://gateway.marvel.com:443/v1/public";
 
 // [GET] Comics 리스트
 export async function apiGetComics() {
-  return await fetch(`${BASE_URL}/comics?apikey=${API_KEY}`, {
+  return await fetch(`${BASE_URL}/comics?hasDigitalIssue=true&characters=1009224%2C1017577&apikey=${API_KEY}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

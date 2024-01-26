@@ -27,8 +27,8 @@ const Card = ({ image, title, link, text, logoMax, imgLogo, imgTit, imgNote, sel
 
           <div className="absolute max-w-7xl w-full h-full flex flex-col text-white space-y-4 justify-center">
             <img src={imgLogo} alt="logo" style={{ maxWidth: `${logoMax}px` }} />
-            <h1 className="text-4xl font-bold uppercase max-w-[600px]">{imgTit}</h1>
-            <p className="text-xl max-w-[660px]">{imgNote}</p>
+            <h1 className="text-4xl font-bold uppercase max-w-[540px]">{imgTit}</h1>
+            <p className="text-xl max-w-[600px]">{imgNote}</p>
             <Button link={link} name={text} />
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function MainSlide() {
       <NoticeDisney />
       <section className="w-full flex flex-col overflow-hidden">
         {/* 슬라이드 영역 */}
-        <div className="relative w-full h-[580px] ">
+        <div className="relative w-full h-[650px] ">
           {testimonials.map((item, index) => (
             <Card key={index} {...item} selected={selected} setSelected={setSelected} position={index} />
           ))}
