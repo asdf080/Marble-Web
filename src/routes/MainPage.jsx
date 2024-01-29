@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { apiGetComics, apiGetEvents } from "./api";
 import TitleRotate from "../components/TitleRotate";
 import { ScaleLoader } from "react-spinners";
+// https://www.npmjs.com/package/react-spinners
 
 export default function MainPage() {
   let lists; // comics fetch 요청한 배열을 받기 위한 변수
@@ -42,7 +43,7 @@ export default function MainPage() {
             <div className="w-full">
               {/* 각 리스트 */}
               {isLoadingEvents ? (
-                <ScaleLoader color="red" className="mx-10 my-10" />
+                <ScaleLoader color="maroon" className="mx-10 my-10" height={60} width={7} radius={4} />
               ) : (
                 events?.map((item) => (
                   <div className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
