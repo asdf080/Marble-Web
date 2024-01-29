@@ -4,7 +4,7 @@ export default function TitleRotate({ text, color = "none" }) {
   return (
     <div className="relative w-80 h-20 flex items-center">
       {/* 텍스트 */}
-      <span className="uppercase tracking-[.2em] font-bold text-lg" style={{ background: color }}>
+      <span className="uppercase tracking-[.2em] font-bold text-xl" style={{ background: color }}>
         {text}
       </span>
       {/* 사선 */}

@@ -2,104 +2,125 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import MainSlide from "../components/MainSlide";
 import TitleImgBox from "../components/TitleImgBox";
+import ListCarousel from "../components/ListCarousel";
 import { useQuery } from "react-query";
-import { apiGetComics } from "./api";
-import { motion } from "framer-motion";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import useMeasure from "react-use-measure";
-
-const ListItem = ({ item, CARD_WIDTH, CARD_HEIGHT, MARGIN }) => (
-  <div className=" shrink-0" style={{ width: CARD_WIDTH, height: CARD_HEIGHT, margin: MARGIN }}>
-    {/* 이미지 */}
-    <div className="w-full h-[280px]">
-      <img className="w-hull h-full object-cover object-center" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="comic" />
-    </div>
-    {/* 타이틀 */}
-    <div className="">
-      <h2 className="font-semibold">{item.title}</h2>
-      <h4 className="text-sm text-gray-500">{item.modified.substr(0, 10)}</h4>
-    </div>
-  </div>
-);
+import { apiGetComics, apiGetEvents } from "./api";
+import TitleRotate from "../components/TitleRotate";
 
 export default function MainPage() {
-  let lists;
+  let lists; // comics fetch 요청한 배열을 받기 위한 변수
+  let events; // events 요청 받는 변수
   const { data, isLoading } = useQuery(["getComics"], apiGetComics);
   if (!isLoading) {
     lists = data?.data.results;
   }
-  console.log(data);
 
-  // 모션
-  const CARD_WIDTH = 194;
-  const CARD_HEIGHT = 350;
-  const MARGIN = 8;
-  const CARD_SIZE = CARD_WIDTH + MARGIN + 8;
-  const BREAKPOINT = {
-    sm: 640,
-    lg: 1024,
-  };
-
-  const [ref, { width }] = useMeasure();
-  const [offset, setOffset] = useState(0);
-
-  const CARD_BUFFER = width > BREAKPOINT.lg ? 3 : width > BREAKPOINT.lg ? 2 : 1;
-
-  const CAN_SHIFT_LEFT = offset < 0;
-  const CAN_SHIFT_RIGHT = Math.abs(offset) > CARD_SIZE * (lists?.length - CARD_BUFFER);
-
-  const shiftLeft = () => {
-    if (!CAN_SHIFT_LEFT) return;
-    setOffset((pv) => (pv += CARD_SIZE));
-  };
-  const shiftRight = () => {
-    if (!CAN_SHIFT_RIGHT) return;
-    setOffset((pv) => (pv -= CARD_SIZE));
-  };
+  const { data: dataEvents, isLoading: isLoadingEvents } = useQuery(["getEvents"], apiGetEvents);
+  if (!isLoadingEvents) {
+    events = dataEvents?.data.results;
+  }
+  console.log(events);
 
   return (
-    <>
-      <Layout>
-        <MainSlide />
-        {/* 코믹스 섹션 */}
+    <Layout>
+      {/* 메인 슬라이드 컴포넌트 */}
+      <MainSlide />
 
-        {/* 이미지로 된 타이틀 */}
-        <TitleImgBox imgUrl="https://assets-prd.ignimgs.com/2023/11/03/themarvels-blogroll-1699047196961.jpg" />
+      {/* 코믹스 섹션 */}
+      <TitleImgBox imgUrl="https://staticg.sportskeeda.com/editor/2023/12/6c1e6-17038758333996-1920.jpg" />
 
-        {/* 코믹스 리스트 */}
-        <section className="w-full flex justify-center">
-          <div ref={ref} className="relative max-w-7xl w-full overflow-hidden">
-            <motion.div animate={{ x: offset }} className="w-full flex">
-              {lists?.map((item, index) => (
-                <ListItem CARD_WIDTH={CARD_WIDTH} CARD_HEIGHT={CARD_HEIGHT} MARGIN={MARGIN} item={item} key={index} />
+      <ListCarousel lists={lists} />
+
+      {/* 이벤트 섹션 */}
+      <section className="w-full flex flex-col justify-center items-center">
+        <div className="max-w-7xl w-full grid grid-cols-[7fr_3fr]">
+          {/* 왼쪽 */}
+          <div className="w-full h-full">
+            <TitleRotate text="the events" color="white" />
+            {/* 이벤트 api 불러오기 */}
+            <div className="w-full">
+              {/* 각 리스트 */}
+              {events?.map((item) => (
+                <div className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
+                  {/* 사진 */}
+                  <div className="w-[420px] h-[235px]">
+                    <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
+                  </div>
+                  {/* 텍스트 */}
+                  <div className="pt-5 px-4">
+                    <h4 className="text-2xl font-bold">{item?.title}</h4>
+                    <p className="text-lg max-h-[140px] my-3 line-clamp-4">{item?.description}</p>
+                    <p className="text-gray-600">{item?.modified.substring(0, 10)}</p>
+                  </div>
+                </div>
               ))}
-            </motion.div>
-
-            {/* 왼쪽 버튼 */}
-            <motion.button
-              initial={false}
-              animate={{
-                x: CAN_SHIFT_LEFT ? "0%" : "-100%",
-              }}
-              onClick={shiftLeft}
-              className="absolute left-0 top-[35%] bg-slate-500/50 duration-100 p-3  pl-2 text-4xl text-white hover:pl-3"
-            >
-              <FaChevronLeft />
-            </motion.button>
-            {/* 오른쪽 버튼 */}
-            <motion.button
-              initial={false}
-              animate={{
-                x: CAN_SHIFT_RIGHT ? "0%" : "100%",
-              }}
-              onClick={shiftRight}
-              className="absolute right-0 top-[40%] w-12 h-14 bg-slate-500/50 p-2 text-4xl text-white hover:pb-4 rounded-lg duration-300"
-            >
-              <FaChevronRight />
-            </motion.button>
+            </div>
           </div>
-        </section>
-      </Layout>
-    </>
+          {/* 오른쪽 */}
+          <aside className="w-full h-[950px] pl-[60px]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="186" height="55" viewBox="0 0 186 55">
+              <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" stroke-width="3"></path>
+            </svg>
+            <h3 className="uppercase text-center text-2xl font-bold">the hype box</h3>
+            <p className=" text-center mt-2 mb-4">
+              Can’t-miss news and updates from <br /> across the Marvel Universe!
+            </p>
+            {/* 리스트 */}
+            <div className="pt-6 pb-8 mx-4 grid grid-cols-[1fr_60%] border-b-2">
+              <img className="mt-2" src="https://cdn.marvel.com/content/1x/resurrection_of_magneto_1_cover_card.jpg" alt="img" />
+              {/* 텍스트 */}
+              <div className="pl-5 font-bold">
+                <p className="text-gray-500 mb-1 text-sm">COMICS</p>
+                <p>January 24's New Marvel Comics: The Full List</p>
+              </div>
+            </div>
+            {/* 리스트 */}
+            <div className="pt-6 pb-8 mx-4 grid grid-cols-[1fr_60%] border-b-2">
+              <img className="mt-2" src="https://cdn.marvel.com/content/1x/the_marvels_5.png" alt="img" />
+              {/* 텍스트 */}
+              <div className="pl-5 font-bold">
+                <p className="text-gray-500 mb-1 text-sm">MOVIES</p>
+                <p>‘The Marvels’ Lands on Disney+ on February 7</p>
+              </div>
+            </div>
+            {/* 리스트 */}
+            <div className="pt-6 pb-8 mx-4 grid grid-cols-[1fr_60%] border-b-2">
+              <img className="mt-2" src="https://cdn.marvel.com/content/1x/echo_1_0.png" alt="img" />
+              {/* 텍스트 */}
+              <div className="pl-5 font-bold">
+                <p className="text-gray-500 mb-1 text-sm">TV SHOWS</p>
+                <p>‘Echo’: Maya Lopez’s Hero (and Villain) Journey</p>
+              </div>
+            </div>
+            {/* 리스트 */}
+            <div className="pt-6 pb-8 mx-4 grid grid-cols-[1fr_60%] border-b-2">
+              <img className="mt-2" src="https://cdn.marvel.com/content/1x/echo_mu-crd-1560x876.jpg" alt="img" />
+              {/* 텍스트 */}
+              <div className="pl-5 font-bold">
+                <p className="text-gray-500 mb-1 text-sm">COMICS</p>
+                <p>The Comics to Read Ahead of Marvel Studios’ ‘Echo’</p>
+              </div>
+            </div>
+            {/* 리스트 */}
+            <div className="pt-6 pb-8 mx-4 grid grid-cols-[1fr_60%]">
+              <img className="mt-2" src="https://cdn.marvel.com/content/1x/x-men_33_cover_card.jpg" alt="img" />
+              {/* 텍스트 */}
+              <div className="pl-5 font-bold">
+                <p className="text-gray-500 mb-1 text-sm">COMICS</p>
+                <p>April's X-Titles Assemble the Avengers, Bring Back Magneto, & More</p>
+              </div>
+            </div>
+            <div className="w-full flex justify-end">
+              <svg xmlns="http://www.w3.org/2000/svg" width="186" height="55" viewBox="0 0 186 55" className="rotate-180">
+                <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" stroke-width="3"></path>
+              </svg>
+            </div>
+          </aside>
+        </div>
+        <button className="uppercase duration-300 my-3 px-6 py-4 bg-gray-300" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }}>
+          load more
+        </button>
+      </section>
+    </Layout>
   );
 }

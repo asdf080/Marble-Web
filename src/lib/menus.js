@@ -7,7 +7,7 @@ export const testimonials = [
     imgLogo: "https://cdn.marvel.com/content/1x/echo_lob_log_eye_01_0.png",
     logoMax: 175,
     imgTit: "STREAM THE 5-EPISODE EVENT NOW!",
-    imgNote: "asdf",
+    imgNote: "Get Hulu, Disney+, and ESPN+, all with ads, for $14.99/mo",
   },
   {
     image: "https://cdn.marvel.com/content/1x/stormmagneto_com_mas_dsk_01.jpg",
