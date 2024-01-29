@@ -21,7 +21,6 @@ export default function MainPage() {
   if (!isLoadingEvents) {
     events = dataEvents?.data.results;
   }
-  console.log(events);
 
   return (
     <Layout>
