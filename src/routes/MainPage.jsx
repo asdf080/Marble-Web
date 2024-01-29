@@ -6,6 +6,7 @@ import ListCarousel from "../components/ListCarousel";
 import { useQuery } from "react-query";
 import { apiGetComics, apiGetEvents } from "./api";
 import TitleRotate from "../components/TitleRotate";
+import { ScaleLoader } from "react-spinners";
 
 export default function MainPage() {
   let lists; // comics fetch 요청한 배열을 받기 위한 변수
@@ -40,20 +41,24 @@ export default function MainPage() {
             {/* 이벤트 api 불러오기 */}
             <div className="w-full">
               {/* 각 리스트 */}
-              {events?.map((item) => (
-                <div className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
-                  {/* 사진 */}
-                  <div className="w-[420px] h-[235px]">
-                    <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
+              {isLoadingEvents ? (
+                <ScaleLoader color="red" className="mx-10 my-10" />
+              ) : (
+                events?.map((item) => (
+                  <div className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
+                    {/* 사진 */}
+                    <div className="w-[420px] h-[235px]">
+                      <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
+                    </div>
+                    {/* 텍스트 */}
+                    <div className="pt-5 px-4">
+                      <h4 className="text-2xl font-bold">{item?.title}</h4>
+                      <p className="text-lg max-h-[140px] my-3 line-clamp-4">{item?.description}</p>
+                      <p className="text-gray-600">{item?.modified.substring(0, 10)}</p>
+                    </div>
                   </div>
-                  {/* 텍스트 */}
-                  <div className="pt-5 px-4">
-                    <h4 className="text-2xl font-bold">{item?.title}</h4>
-                    <p className="text-lg max-h-[140px] my-3 line-clamp-4">{item?.description}</p>
-                    <p className="text-gray-600">{item?.modified.substring(0, 10)}</p>
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
           {/* 오른쪽 */}
