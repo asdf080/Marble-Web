@@ -46,7 +46,7 @@ export default function MainPage() {
                 <ScaleLoader color="maroon" className="mx-10 my-10" height={60} width={7} radius={4} />
               ) : (
                 events?.map((item) => (
-                  <div className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
+                  <div key={item.id} className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
                     {/* 사진 */}
                     <div className="w-[420px] h-[235px]">
                       <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
@@ -65,7 +65,7 @@ export default function MainPage() {
           {/* 오른쪽 */}
           <aside className="w-full h-[950px] pl-[60px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="186" height="55" viewBox="0 0 186 55">
-              <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" stroke-width="3"></path>
+              <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" strokeWidth="3"></path>
             </svg>
             <h3 className="uppercase text-center text-2xl font-bold">the hype box</h3>
             <p className=" text-center mt-2 mb-4">
@@ -118,7 +118,7 @@ export default function MainPage() {
             </div>
             <div className="w-full flex justify-end">
               <svg xmlns="http://www.w3.org/2000/svg" width="186" height="55" viewBox="0 0 186 55" className="rotate-180">
-                <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" stroke-width="3"></path>
+                <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" strokeWidth="3"></path>
               </svg>
             </div>
           </aside>
