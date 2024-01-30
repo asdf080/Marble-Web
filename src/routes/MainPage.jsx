@@ -6,7 +6,7 @@ import ListCarousel from "../components/ListCarousel";
 import { useQuery } from "react-query";
 import { apiGetComics, apiGetEvents, apiGetCharacters } from "./api";
 import TitleRotate from "../components/TitleRotate";
-import { ScaleLoader } from "react-spinners";
+import { SyncLoader } from "react-spinners";
 import Button from "../components/Button";
 // https://www.npmjs.com/package/react-spinners
 
@@ -50,7 +50,7 @@ export default function MainPage() {
               {/* 각 리스트 */}
               {isLoadingEvents ? (
                 <div className="w-full flex justify-center my-16">
-                  <ScaleLoader color="maroon" height={60} width={7} radius={4} />
+                  <SyncLoader color="maroon" height={60} width={7} radius={4} />
                 </div>
               ) : (
                 events?.map((item) => (
@@ -140,7 +140,7 @@ export default function MainPage() {
       <TitleImgBox imgUrl="https://bleedingfool.com/wp-content/uploads/2023/12/marvel-mutts.jpg" mainTit="on sale 1/31" subTit="NEW COMICS THIS WEEK" des="Check out the newest Marvel comics coming out this week!" btnTxt="print subscription" />
       {isLoadingChar ? (
         <div className="w-full flex justify-center">
-          <ScaleLoader color="maroon" className="mx-10 my-10" height={60} width={7} radius={4} />
+          <SyncLoader color="maroon" className="mx-10 my-10" height={60} width={7} radius={4} />
         </div>
       ) : (
         <ListCarousel lists={characters} />
