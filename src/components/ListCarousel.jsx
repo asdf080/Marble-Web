@@ -16,10 +16,10 @@ const ListItem = ({ item, CARD_WIDTH, CARD_HEIGHT, MARGIN }) => (
     <div className="w-full h-[300px]">
       <img className="w-full h-full object-cover object-center duration-300 group-hover:-translate-y-3" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="comic_image" />
     </div>
-    {/* 2 타이틀 */}
+    {/* 2 타이틀, 이름 */}
     <div className="">
-      <h2 className="font-semibold duration-300 group-hover:text-red-600">{item.title.substr(0, 20)}</h2>
-      <h4 className=" text-gray-500">{item.modified.substr(0, 10)}</h4>
+      <h2 className="font-semibold duration-300 group-hover:text-red-600">{item.title?.substr(0, 20) || item?.name.substr(0, 15)}</h2>
+      <h4 className=" text-gray-500 truncate">{item.title ? item.modified.substr(0, 10) : item.stories.items?.[0].name}</h4>
     </div>
   </div>
 );

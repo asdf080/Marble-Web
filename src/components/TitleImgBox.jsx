@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TitleRotate from "../components/TitleRotate";
 
-export default function TitleImgBox({ imgUrl }) {
+export default function TitleImgBox({ imgUrl, mainTit, subTit, des, btnTxt }) {
   return (
     <div style={{ clipPath: "polygon(0 0, 100% 0, 100% 93%, 0% 100%)" }} className="relative w-full h-[600px] flex justify-end bg-[#151515]">
       {/* 오른쪽 이미지 */}
@@ -16,13 +16,13 @@ export default function TitleImgBox({ imgUrl }) {
             {/* 로고 */}
             <img src="https://cdn.marvel.com/content/1x/mulogo_lob_log_eye_01_1.png" alt="logo" />
             {/* 사선 제목 */}
-            <TitleRotate text="available now" color="#151515" />
-            <h2 className="text-4xl font-bold">NEW ON MARVEL UNLIMITED</h2>
-            <p>Read these plus 30,000+ digital comics for $9.99 a month!</p>
+            <TitleRotate text={mainTit} color="#151515" />
+            <h2 className="text-4xl font-bold">{subTit}</h2>
+            <p>{des}</p>
           </div>
           <Link to="https://www.naver.com/">
             <button className="uppercase duration-500 px-10 py-3 border border-white" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }}>
-              GET MARVEL UNLIMITED
+              {btnTxt}
             </button>
           </Link>
         </div>

@@ -21,7 +21,7 @@ export const testimonials = [
   },
   {
     image: "https://cdn.marvel.com/content/1x/watchers9days_com_mas_dsk_01.jpg",
-    title: "What if.. Season..2",
+    title: "What if...? Season.2",
     text: "UNLOCK NOW",
     link: "https://www.daum.net",
     imgLogo: "https://cdn.marvel.com/content/1x/whatifs2_log_eye_02.png",
