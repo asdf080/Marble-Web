@@ -134,7 +134,6 @@ export default function MainPage() {
         <button className="uppercase duration-300 mt-6 mb-20 px-7 py-4 bg-gray-200" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }}>
           load more
         </button>
-        <Button />
       </section>
 
       {/* 캐릭터 섹션 */}
