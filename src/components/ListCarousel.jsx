@@ -14,7 +14,7 @@ const ListItem = ({ item, CARD_WIDTH, CARD_HEIGHT, MARGIN }) => (
   >
     {/* 1 이미지 박스 */}
     <div className="w-full h-[300px]">
-      <img className="w-full h-full object-cover object-center duration-300 group-hover:-translate-y-3" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="comic_image" />
+      <img className="w-full h-full will-change-transform object-cover object-center duration-300 group-hover:-translate-y-3" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="comic_image" />
     </div>
     {/* 2 타이틀, 이름 */}
     <div className="">

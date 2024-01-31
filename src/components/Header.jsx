@@ -2,6 +2,7 @@ import React from "react";
 import { IoSearch } from "react-icons/io5";
 import mainLogo from "../assets/mainLogo.png";
 import inLogo from "../assets/inLogo.png";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -16,9 +17,11 @@ export default function Header() {
             <span>abc</span>
           </div>
           {/* 중앙:로고 */}
-          <div className="h-full absolute top-0 left-1/2 -translate-x-1/2">
-            <img src={mainLogo} alt="MarvelLogo" />
-          </div>
+          <Link to="/">
+            <div className="h-full absolute top-0 left-1/2 -translate-x-1/2">
+              <img src={mainLogo} alt="MarvelLogo" />
+            </div>
+          </Link>
           {/* 오른쪽:검색 */}
           <div className="h-full px-4 flex border-x border-gray-600 items-center">
             {/* 구독 버튼 */}
@@ -38,8 +41,12 @@ export default function Header() {
       </section>
       <section className="border-t border-gray-600 w-full flex justify-center items-center h-10 bg-main-dark space-x-8 text-sm">
         <p>news</p>
-        <p>comics</p>
-        <p>characters</p>
+        <Link to="/comics">
+          <p>comics</p>
+        </Link>
+        <Link to="/characters">
+          <p>characters</p>
+        </Link>
         <p>movies</p>
         <p>tv shows</p>
         <p>games</p>

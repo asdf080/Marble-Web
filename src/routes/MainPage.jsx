@@ -27,7 +27,6 @@ export default function MainPage() {
   const { data: dataChar, isLoading: isLoadingChar } = useQuery(["getCharacters", { limit: 20 }], apiGetCharacters);
   if (!isLoadingChar) {
     characters = dataChar?.data.results;
-    console.log(characters);
   }
 
   return (
