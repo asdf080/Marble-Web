@@ -14,7 +14,7 @@ export default function Header() {
             <span className="inline-block">
               <img className="h-5" src={inLogo} alt="inLogo" />
             </span>
-            <span>abc</span>
+            <span>080</span>
           </div>
           {/* 중앙:로고 */}
           <Link to="/">

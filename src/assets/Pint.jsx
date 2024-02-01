@@ -6,7 +6,7 @@ export default function Pint() {
   return (
     <Link to="https://www.pinterest.co.kr/marvelofficial/">
       <div className="cursor-pointer w-6 h-6 text-gray-500 hover:text-white duration-500">
-        <BiLogoPinterest size="full" />
+        <BiLogoPinterest size="100%" />
       </div>
     </Link>
   );

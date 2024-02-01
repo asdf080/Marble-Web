@@ -6,7 +6,7 @@ export default function Insta() {
   return (
     <Link to="https://www.instagram.com/marvel/">
       <div className="cursor-pointer w-6 h-6 text-gray-500 hover:text-white duration-500">
-        <TiSocialInstagram size="full" />
+        <TiSocialInstagram size="100%" />
       </div>
     </Link>
   );

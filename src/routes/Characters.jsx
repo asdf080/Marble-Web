@@ -4,6 +4,7 @@ import TitleRotate from "../components/TitleRotate";
 import { useQuery } from "react-query";
 import { apiGetCharacters } from "./api";
 import { SyncLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
 export default function Characters() {
   let characters;
@@ -34,23 +35,25 @@ export default function Characters() {
                 <SyncLoader color="maroon" height={60} width={7} radius={4} />
               </div>
             ) : (
-              characters?.map((item, index) => (
-                <div key={index} className="h-[340px] group cursor-pointer">
-                  <div style={{ clipPath: "polygon(100% 0, 100% 91%, 87% 100%, 0 100%, 0 0)" }} className="w-full h-full flex flex-col bg-red-500">
-                    {/* 이미지 */}
-                    <div className="w-full h-[60%] overflow-hidden">
-                      <img className="w-full h-full object-cover group-hover:scale-110 duration-300 will-change-transform" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
-                    </div>
-                    {/* 타이틀 */}
-                    <div className="relative w-full h-[40%] text-white flex items-end">
-                      <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-evenly py-2 p-4">
-                        <h2 className="font-bold">{item?.name}</h2>
-                        <p className="line-clamp-2 text-sm">{item?.description}</p>
+              characters?.map((item) => (
+                <div key={item.id} className="h-[340px] group cursor-pointer">
+                  <Link to={`/characters/${item.id}`}>
+                    <div style={{ clipPath: "polygon(100% 0, 100% 91%, 87% 100%, 0 100%, 0 0)" }} className="w-full h-full flex flex-col bg-red-500">
+                      {/* 이미지 */}
+                      <div className="w-full h-[60%] overflow-hidden">
+                        <img className="w-full h-full object-cover group-hover:scale-110 duration-300 will-change-transform" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
                       </div>
-                      {/* 호버시 움직이는 부분 */}
-                      <div className="w-full h-[95%] bg-main-dark group-hover:h-0 duration-300"></div>
+                      {/* 타이틀 */}
+                      <div className="relative w-full h-[40%] text-white flex items-end">
+                        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-evenly py-2 p-4">
+                          <h2 className="font-bold">{item?.name}</h2>
+                          <p className="line-clamp-2 text-sm">{item?.description}</p>
+                        </div>
+                        {/* 호버시 움직이는 부분 */}
+                        <div className="w-full h-[95%] bg-main-dark group-hover:h-0 duration-300"></div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))
             )}

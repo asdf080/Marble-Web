@@ -6,7 +6,7 @@ export default function Facebook() {
   return (
     <Link to="https://www.facebook.com/Marvel/">
       <div className="cursor-pointer w-6 h-6 text-gray-500 hover:text-white duration-500">
-        <FaSquareFacebook size="full" />
+        <FaSquareFacebook size="100%" />
       </div>
     </Link>
   );
