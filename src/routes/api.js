@@ -43,6 +43,8 @@ export async function apiGetComicsSpi() {
   }
 }
 
+// [GET] Comics other work
+
 // [GET] Events 리스트
 export async function apiGetEvents() {
   try {
