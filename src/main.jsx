@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Characters from "./routes/Characters.jsx";
 import Comics from "./routes/Comics.jsx";
 import CharactersDetail from "./routes/CharactersDetail.jsx";
+import ComicsDetail from "./routes/ComicsDetail.jsx";
+import Email from "./routes/Email.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +22,20 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
+        path: "email",
+        element: <Email />,
+      },
+      {
         path: "characters",
         element: <Characters />,
       },
       {
         path: "comics",
         element: <Comics />,
+      },
+      {
+        path: "comics/:id",
+        element: <ComicsDetail />,
       },
       {
         path: "characters/:id",

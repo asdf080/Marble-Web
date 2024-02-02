@@ -13,6 +13,7 @@ export default function CharactersDetail() {
   console.log(detail);
   return (
     <Layout>
+      {/* 위 */}
       <div
         className="relative w-full flex justify-center py-16 object-cover object-top"
         style={{
@@ -54,6 +55,7 @@ export default function CharactersDetail() {
           </div>
         )}
       </div>
+      {/* 아래 */}
       <div className="w-full flex justify-center py-10">
         <div className="max-w-7xl w-full">
           <h3 className="text-3xl uppercase font-semibold py-6">more information</h3>

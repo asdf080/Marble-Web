@@ -16,7 +16,6 @@ export default function Comics() {
   const { data: dataSpi, isLoading: isLoadingSpi } = useQuery(["getComicsSpi"], apiGetComicsSpi);
   if (!isLoadingSpi) {
     spi = dataSpi?.data.results;
-    console.log(spi);
   }
   return (
     <Layout>
@@ -45,20 +44,22 @@ export default function Comics() {
                 <SyncLoader color="maroon" height={60} width={7} radius={4} />
               </div>
             ) : (
-              mutts?.slice(0, 5).map((item) => (
-                <div key={item.id} className="w-[224px] h-[450px] group cursor-pointer">
-                  <div className="shadow-2xl will-change-transform duration-300 group-hover:-translate-y-3">
-                    <img className="w-full h-[336px] shadow-md" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
+              mutts?.slice(0, 5).map((item, index, arr) => (
+                <Link key={index} to={`/comics/${item.id}`} state={{ comics: arr }}>
+                  <div className="w-[224px] h-[450px] group">
+                    <div className="shadow-2xl will-change-transform duration-300 group-hover:-translate-y-3">
+                      <img className="w-full h-[336px] shadow-md" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
+                    </div>
+                    <div className="font-bold text-lg mt-5">{item.title}</div>
+                    <p className=" line-clamp-2">{item.textObjects?.[0].text}</p>
                   </div>
-                  <div className="font-bold text-lg mt-5">{item.title}</div>
-                  <p className=" line-clamp-2">{item.textObjects?.[0].text}</p>
-                </div>
+                </Link>
               ))
             )}
           </article>
           {/* 배너 */}
           <TitleRotate text="NEW IN MARVEL UNLIMITED" color="white" />
-          <Link to="/comics">
+          <Link to="/">
             <div className="w-full border-t-2 border-b-2 mt-6 flex justify-center items-center">
               <img src="https://cdn.marvel.com/u/prod/marvel/images/mu/web/2021/mu-promo-callout-thin.jpg" alt="img" className="w-[360px] h-[70px] object-cover" />
               <div className="w-full flex justify-around items-center font-bold">
@@ -79,13 +80,15 @@ export default function Comics() {
                 <SyncLoader color="maroon" height={60} width={7} radius={4} />
               </div>
             ) : (
-              spi?.slice(0, 5).map((item) => (
-                <div key={item.id} className="w-[224px] h-[450px] group cursor-pointer">
-                  <div className="shadow-2xl will-change-transform duration-300 group-hover:-translate-y-3">
-                    <img className="w-full h-[336px] shadow-md" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
+              spi?.slice(0, 5).map((item, index, arr) => (
+                <Link key={index} to={`/comics/${item.id}`} state={{ comics: arr }}>
+                  <div className="w-[224px] h-[450px] group cursor-pointer">
+                    <div className="shadow-2xl will-change-transform duration-300 group-hover:-translate-y-3">
+                      <img className="w-full h-[336px] shadow-md" src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`} alt="img" />
+                    </div>
+                    <div className="font-bold text-lg mt-5">{item.title}</div>
                   </div>
-                  <div className="font-bold text-lg mt-5">{item.title}</div>
-                </div>
+                </Link>
               ))
             )}
           </article>
