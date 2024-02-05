@@ -2,16 +2,27 @@ import React from "react";
 import Layout7 from "../components/Layout7";
 import Layout from "../components/Layout";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { apiPostMail } from "./api";
 
 export default function Email() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ mode: "onChange" });
+
+  const { mutate, isLoading, data } = useMutation(apiPostMail, {
+    onSuccess: () => {
+      if (data.result === "success") reset();
+    },
+  });
+
   const onSubmit = (formData) => {
-    console.log(formData);
+    mutate(formData);
   };
+
   return (
     <Layout>
       <Layout7>
@@ -42,7 +53,7 @@ export default function Email() {
               placeholder="이메일"
             />
             <div className="text-red-600 min-h-5 mt-2 mb-8 ml-2">{errors?.email?.message || ""}</div>
-            <input
+            <textarea
               {...register("msg", {
                 required: "내용을 입력해주세요.",
                 minLength: {
@@ -53,10 +64,11 @@ export default function Email() {
               className="px-4 py-2 border text-lg"
               type="textArea"
               placeholder="내용"
+              row="3"
             />
             <div className="text-red-600 min-h-5 mt-2 mb-8 ml-2">{errors?.msg?.message || ""}</div>
-            <button className="uppercase bg-red-600 duration-500 hover:bg-red-700 px-10 py-3 text-white w-[150px]" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }}>
-              전송
+            <button className="uppercase bg-red-600 duration-500 hover:bg-red-700 px-10 py-3 text-white w-[150px]" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }} disabled={isLoading}>
+              {isLoading ? "전송 중..." : "전송"}
             </button>
           </form>
         </section>

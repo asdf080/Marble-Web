@@ -1,3 +1,5 @@
+import qs from "qs";
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://gateway.marvel.com:443/v1/public";
 
@@ -43,8 +45,6 @@ export async function apiGetComicsSpi() {
   }
 }
 
-// [GET] Comics other work
-
 // [GET] Events 리스트
 export async function apiGetEvents() {
   try {
@@ -85,5 +85,17 @@ export async function apiGetCharactersDetail({ queryKey }) {
     }).then((res) => res.json());
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function apiPostMail(data) {
+  try {
+    return await fetch("https://script.google.com/macros/s/AKfycbxXxNboj8sywKXdcMWR6xaHTYGG_To3BDG-MEDexDVnZzRzthK5S7MAaQH-Y6R0TnQ/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: qs.stringify(data),
+    }).then((res) => res.json());
+  } catch (e) {
+    console.error(e);
   }
 }

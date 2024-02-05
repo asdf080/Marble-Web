@@ -105,65 +105,6 @@ export default function ComicsDetail() {
           </div>
         </div>
       </div>
-      {/* 본문: 아래 */}
-      <div className="w-full bg-main-dark flex justify-center py-16">
-        <div className="max-w-7xl w-full text-white px-6">
-          <h3 className="uppercase text-2xl font-semibold mb-10">more details</h3>
-          <div className="flex gap-40 text-[19px]">
-            <div>
-              <h4 className="uppercase font-bold mb-4 spacing">informaion</h4>
-              <div>
-                <span className="uppercase font-bold text-gray-200">format: </span>
-                <span>{item.format}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">prices: </span>
-                <span>{item.prices?.[0].price || "-"}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">upc: </span>
-                <span>{item.upc}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">FOC Date: </span>
-                <span>{item.dates?.[2].date.substr(0, 10)}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">Unlimited Date: </span>
-                <span>{item.dates?.[1].date.substr(0, 10)}</span>
-              </div>
-            </div>
-            <div>
-              <h4 className="uppercase font-bold mb-4 spacing">staff</h4>
-              <div>
-                <span className="uppercase font-bold text-gray-200">{item?.creators?.items?.[1].role}: </span>
-                <span>{item?.creators?.items?.[1].name || "-"}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">{item?.creators?.items?.[0].role}: </span>
-                <span>{item?.creators?.items?.[0].name || "-"}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">{item?.creators?.items?.[2].role}: </span>
-                <span>{item?.creators?.items?.[2].name || "-"}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">{item?.creators?.items?.[3].role}: </span>
-                <span>{item?.creators?.items?.[3].name || "-"}</span>
-              </div>
-              <div>
-                <span className="uppercase font-bold text-gray-200">{item?.creators?.items?.[4].role}: </span>
-                <span>{item?.creators?.items?.[4].name || "-"}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="w-full flex justify-center py-16">
-        <div className="max-w-7xl w-full">
-          <TitleRotate text={`WRITER's other works`} color="white" />
-        </div>
-      </div>
     </Layout>
   );
 }

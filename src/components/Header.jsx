@@ -27,10 +27,12 @@ export default function Header() {
             {/* 구독 버튼 */}
             <div className="h-full flex items-center space-x-2 pr-4 pb-1">
               <img className="h-[22px] inline-block" src="https://cdn.marvel.com/u/prod/marvel/images/mu/web/2021/icon-mu-shield.png" alt="img" />
-              <div className="inline-block text-center">
-                <p className="text-sm">Marvel Unlimited</p>
-                <p className="text-xs">Subscribe</p>
-              </div>
+              <Link to="/email">
+                <div className="inline-block text-center">
+                  <p className="text-sm">send email for qna</p>
+                  <p className="text-xs">at anytime</p>
+                </div>
+              </Link>
             </div>
             {/* 검색 */}
             <div className="flex items-center pl-4 h-full border-l border-gray-600">
