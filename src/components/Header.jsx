@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import mainLogo from "../assets/mainLogo.png";
 import inLogo from "../assets/inLogo.png";
 import { Link } from "react-router-dom";
+import NavLink from "./NavLink";
+import { AnimatePresence, motion } from "framer-motion";
+import ComicsCompo from "./menus/ComicsCompo";
+
+const MENUS = [
+  { text: "news", href: "#", component: ComicsCompo },
+  { text: "comics", href: "/comics", component: "" },
+  { text: "characters", href: "/characters", component: "" },
+  { text: "movies", href: "/movies", component: "" },
+  { text: "tv shows", href: "/tv shows", component: "" },
+  { text: "games", href: "/games", component: "" },
+  { text: "videos", href: "/videos", component: "" },
+  { text: "more", href: "/more", component: "" },
+];
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="uppercase text-white font-bold">
       <section className="w-full flex justify-center h-[52px] bg-main-dark uppercase">
@@ -41,20 +56,21 @@ export default function Header() {
           </div>
         </div>
       </section>
-      <section className="border-t border-gray-600 w-full flex justify-center items-center h-10 bg-main-dark space-x-8 text-sm">
-        <p>news</p>
-        <Link to="/comics">
-          <p>comics</p>
-        </Link>
-        <Link to="/characters">
-          <p>characters</p>
-        </Link>
-        <p>movies</p>
-        <p>tv shows</p>
-        <p>games</p>
-        <p>videos</p>
-        <p>more</p>
-      </section>
+      <div className="relative">
+        <section className="border-t border-gray-600 w-full flex justify-center items-center h-12 bg-main-dark space-x-8 text-sm">
+          {MENUS.map((item, index) => (
+            <NavLink key={index} href={item.href} compo={item.component} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
+              {item.text}
+            </NavLink>
+          ))}
+        </section>
+        {menuOpen ? (
+          <AnimatePresence>
+            {/* 자식 컴포넌트들은 유일한 key를 가져야만 AnimatePresence가 제대로 동작한다. */}
+            <motion.div initial={{ opacity: 0.5, y: -3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} transition={{ duration: 0.2 }} className="absolute z-10 top-12 left-0 right-0 w-full h-40 bg-white"></motion.div>
+          </AnimatePresence>
+        ) : null}
+      </div>
     </div>
   );
 }

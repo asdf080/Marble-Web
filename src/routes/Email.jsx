@@ -15,7 +15,8 @@ export default function Email() {
 
   const { mutate, isLoading, data } = useMutation(apiPostMail, {
     onSuccess: () => {
-      if (data.result === "success") reset();
+      if (data?.result === "success") reset();
+      alert("메일이 전송되었습니다.");
     },
   });
 

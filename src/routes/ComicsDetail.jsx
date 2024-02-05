@@ -18,7 +18,6 @@ export default function ComicsDetail() {
   const index = comics?.indexOf(item);
   const next = index > 0 ? comics[index - 1] : comics[comics?.length - 1];
   const prev = index < comics?.length - 1 ? comics[index + 1] : 0;
-  console.log(item);
 
   return (
     <Layout>
