@@ -88,7 +88,7 @@ export default function MainSlide() {
           ))}
         </div>
         {/* 버튼 영역 */}
-        <div className="z-10 w-full h-20 flex justify-center">
+        <div className="z-10 w-full h-20 hidden justify-center md:flex">
           <div className="max-w-7xl w-full h-full grid grid-cols-4">
             {/* 75% cols-3*/}
             <div className="col-span-3 bg-white -translate-y-8 px-4">

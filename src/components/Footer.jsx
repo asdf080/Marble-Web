@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
         </div>
         {/* 광고 */}
-        <div className="space-y-8">
+        <div className="space-y-8 hidden md:block">
           {/* 위 */}
           <div className="flex space-x-6 items-center">
             {/* 이미지 */}
@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
         </div>
         {/* sns */}
-        <div className="space-y-6">
+        <div className="space-y-6 hidden lg:block">
           <h4 className="font-semibold">FOLLOW MARVEL</h4>
           <div className="grid grid-cols-4 grid-rows-2 gap-y-6 gap-x-6">
             <div>

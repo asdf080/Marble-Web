@@ -40,22 +40,22 @@ export default function MainPage() {
 
       {/* 이벤트 섹션 */}
       <section className="w-full flex flex-col justify-center items-center">
-        <div className="max-w-7xl w-full grid grid-cols-[7fr_3fr]">
+        <div className="max-w-7xl w-full grid xl:grid-cols-[7fr_3fr]">
           {/* 왼쪽 */}
-          <div className="w-full h-full">
+          <div className="w-full h-full ">
             <TitleRotate text="the events" color="white" />
             {/* 이벤트 api 불러오기 */}
             <div className="w-full">
               {/* 각 리스트 */}
               {isLoadingEvents ? (
-                <div className="w-full flex justify-center my-16">
+                <div className="w-full flex justify-center">
                   <SyncLoader color="maroon" height={60} width={7} radius={4} />
                 </div>
               ) : (
                 events?.map((item) => (
-                  <div key={item.id} className="grid grid-cols-2 py-4 border-b-2 border-gray-400">
+                  <div key={item.id} className="grid grid-cols-1 grid-rows-2 xl:grid-cols-2 xl:grid-rows-1 py-4 border-b-2 border-gray-400 ml-3">
                     {/* 사진 */}
-                    <div className="w-[420px] h-[235px]">
+                    <div className="w-full lg:w-[420px] h-[235px]">
                       <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
                     </div>
                     {/* 텍스트 */}
@@ -70,7 +70,7 @@ export default function MainPage() {
             </div>
           </div>
           {/* 오른쪽 */}
-          <aside className="w-full h-[950px] pl-[60px]">
+          <aside className="w-full h-[950px] pl-[60px] hidden xl:block">
             <svg xmlns="http://www.w3.org/2000/svg" width="186" height="55" viewBox="0 0 186 55">
               <path d="M21.4 1L1 21.4V717h264.6l20.4-20.4V1H21.4z" mask="url(#border-line_svg__mask-2)" fill="none" stroke="#c6a972" strokeWidth="3"></path>
             </svg>
@@ -147,7 +147,7 @@ export default function MainPage() {
 
       {/* 마블 인사이더 */}
       <section className="w-full h-[350px] flex justify-center bg-black">
-        <div className="max-w-7xl w-full h-full grid grid-cols-[4.5fr_5.5fr]">
+        <div className="max-w-7xl w-full h-full grid grid-cols-1 md:grid-cols-[4.5fr_5.5fr]">
           {/* 왼쪽 */}
           <div className="w-full h-full bg-[url('https://cdn.marvel.com/content/1x/01-mi-promo-april2020-featured-half-dsk-1140x680_4.jpg')]"></div>
           {/* 오른쪽 */}

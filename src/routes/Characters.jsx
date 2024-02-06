@@ -29,7 +29,7 @@ export default function Characters() {
           {/* 제목 */}
           <TitleRotate text="FEATURED CHARACTERS" color="white" />
           {/* 리스트 */}
-          <div className="grid grid-cols-6 gap-4 py-4">
+          <div className="grid grid-cols-2 gap-4 py-4 md:grid-cols-4 lg:grid-cols-6">
             {isLoading ? (
               <div className="flex justify-center mt-8 mb-16 col-span-6">
                 <SyncLoader color="maroon" height={60} width={7} radius={4} />
