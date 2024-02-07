@@ -9,7 +9,7 @@ import ComicsCompo from "./menus/ComicsCompo";
 import CharaCompo from "./menus/CharaCompo";
 import MobileMenu from "./MobileMenu";
 
-const MENUS = [
+export const MENUS = [
   { text: "news", href: "#", component: "" },
   { text: "comics", href: "/comics", component: ComicsCompo },
   { text: "characters", href: "/characters", component: CharaCompo },

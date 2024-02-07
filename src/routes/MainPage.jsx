@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import MainSlide from "../components/MainSlide";
 import TitleImgBox from "../components/TitleImgBox";
 import ListCarousel from "../components/ListCarousel";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { apiGetComics, apiGetEvents, apiGetCharacters } from "./api";
 import TitleRotate from "../components/TitleRotate";
 import { SyncLoader } from "react-spinners";
@@ -12,17 +12,34 @@ import Button from "../components/Button";
 
 export default function MainPage() {
   let lists; // comics fetch 요청한 배열을 받기 위한 변수
-  let events; // events 요청 받는 변수
   let characters;
   const { data, isLoading } = useQuery(["getComics"], apiGetComics);
   if (!isLoading) {
     lists = data?.data.results;
   }
 
-  const { data: dataEvents, isLoading: isLoadingEvents } = useQuery(["getEvents"], apiGetEvents);
-  if (!isLoadingEvents) {
-    events = dataEvents?.data.results;
-  }
+  const {
+    data: dataEvents,
+    isLoading: isLoadingEvents,
+    fetchNextPage, // 다음 페이지를 불러옴
+    hasNextPage, // 다음 페이지 존재여부(boolean)
+    isFetchingNextPage, // 다음 페이지 로딩중(boolean)
+  } = useInfiniteQuery(
+    // 쿼리키, 캐시에 참조하는 레퍼런스
+    ["getEvents"],
+    // 현재 어떤 페이지에 있는지 확인하는 파라미터(기본값: undefined), api 요청시 기본값으로 넣어서 사용 가능
+    ({ pageParam = 0 }) => apiGetEvents({ pageParam }),
+    {
+      // 다음 페이지(새 데이터)를 불러올 때 마지막 페이지(lastPage)와 전체 페이지(pages)
+      getNextPageParam: (lastPage, pages) => {
+        const limit = lastPage?.data?.limit;
+        const count = lastPage?.data?.count;
+        if (count === limit) {
+          return pages.length;
+        } else return null;
+      },
+    }
+  );
 
   const { data: dataChar, isLoading: isLoadingChar } = useQuery(["getCharacters", { limit: 20 }], apiGetCharacters);
   if (!isLoadingChar) {
@@ -52,20 +69,22 @@ export default function MainPage() {
                   <SyncLoader color="maroon" height={60} width={7} radius={4} />
                 </div>
               ) : (
-                events?.map((item) => (
-                  <div key={item.id} className="grid grid-cols-1 grid-rows-2 xl:grid-cols-2 xl:grid-rows-1 py-4 border-b-2 border-gray-400 ml-3">
-                    {/* 사진 */}
-                    <div className="w-full lg:w-[420px] h-[235px]">
-                      <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
+                dataEvents?.pages.map((page) =>
+                  page?.data.results.map((item) => (
+                    <div key={item.id} className="grid grid-cols-1 grid-rows-2 xl:grid-cols-2 xl:grid-rows-1 py-4 border-b-2 border-gray-400 ml-3">
+                      {/* 사진 */}
+                      <div className="w-full lg:w-[420px] h-[235px]">
+                        <img className="w-full h-full object-cover" src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`} alt="img" />
+                      </div>
+                      {/* 텍스트 */}
+                      <div className="pt-5 px-4">
+                        <h4 className="text-2xl font-bold">{item?.title}</h4>
+                        <p className="text-lg max-h-[140px] my-3 line-clamp-4">{item?.description}</p>
+                        <p className="text-gray-600">{item?.modified.substring(0, 10)}</p>
+                      </div>
                     </div>
-                    {/* 텍스트 */}
-                    <div className="pt-5 px-4">
-                      <h4 className="text-2xl font-bold">{item?.title}</h4>
-                      <p className="text-lg max-h-[140px] my-3 line-clamp-4">{item?.description}</p>
-                      <p className="text-gray-600">{item?.modified.substring(0, 10)}</p>
-                    </div>
-                  </div>
-                ))
+                  ))
+                )
               )}
             </div>
           </div>
@@ -130,8 +149,16 @@ export default function MainPage() {
             </div>
           </aside>
         </div>
-        <button className="uppercase duration-300 mt-6 mb-20 px-7 py-4 bg-gray-200" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }}>
-          load more
+        <button className="uppercase duration-300 mt-6 mb-20 px-7 py-4 bg-gray-200" style={{ clipPath: "polygon(10% 0, 100% 0, 100% 74%, 90% 100%, 0 100%, 0 30%)" }} onClick={() => fetchNextPage()}>
+          {isFetchingNextPage ? (
+            <div className="w-full flex justify-center px-4 py-1">
+              <SyncLoader color="maroon" height={60} width={7} radius={4} />
+            </div>
+          ) : hasNextPage ? (
+            "load more"
+          ) : (
+            "nothing to load"
+          )}
         </button>
       </section>
 

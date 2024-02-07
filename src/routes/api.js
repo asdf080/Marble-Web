@@ -46,9 +46,10 @@ export async function apiGetComicsSpi() {
 }
 
 // [GET] Events 리스트
-export async function apiGetEvents() {
+export async function apiGetEvents({ pageParam }) {
+  const offset = pageParam * 10;
   try {
-    return await fetch(`${BASE_URL}/events?orderBy=-startDate&limit=10&apikey=${API_KEY}`, {
+    return await fetch(`${BASE_URL}/events?orderBy=-startDate&limit=10&offset=${offset}&apikey=${API_KEY}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
