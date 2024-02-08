@@ -2,7 +2,6 @@ import qs from "qs";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://gateway.marvel.com:443/v1/public";
-
 // https://tanstack.com/query/latest/docs/react/quick-start
 
 // [GET] Comics 리스트
