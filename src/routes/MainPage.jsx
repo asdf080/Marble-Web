@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import MainSlide from "../components/MainSlide";
 import TitleImgBox from "../components/TitleImgBox";
@@ -45,7 +45,8 @@ export default function MainPage() {
   if (!isLoadingChar) {
     characters = dataChar?.data.results;
   }
-  console.log(`
+  useEffect(() => {
+    console.log(`
       ROCKET SCIENCE
 
             ##
@@ -69,7 +70,8 @@ export default function MainPage() {
            #  #
             ##
 
-`);
+    `);
+  }, []);
 
   return (
     <Layout>
