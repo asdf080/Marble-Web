@@ -45,6 +45,31 @@ export default function MainPage() {
   if (!isLoadingChar) {
     characters = dataChar?.data.results;
   }
+  console.log(`
+      ROCKET SCIENCE
+
+            ##
+           #  #
+          #    #
+         #      #
+        #   ##   #
+       #  #    #  #
+       #  #    #   #
+     ##     ##     ##
+    # #            # #
+   #  #            #  #
+  #   #            #   #
+ #    #            #    #
+ #  # #            # #  #
+ # #   #          #   # #
+ #      # # # # ##      #
+
+         #      #
+          #    #
+           #  #
+            ##
+
+`);
 
   return (
     <Layout>

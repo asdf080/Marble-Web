@@ -10,7 +10,6 @@ export default function CharactersDetail() {
   const { id } = useParams();
   const { data, isLoading } = useQuery(["getCharactersDetail", { id }], apiGetCharactersDetail);
   if (!isLoading) detail = data?.data.results[0];
-  console.log(detail);
   return (
     <Layout>
       {/* 위 */}
